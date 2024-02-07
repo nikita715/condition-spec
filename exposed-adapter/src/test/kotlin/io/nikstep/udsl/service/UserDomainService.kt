@@ -15,6 +15,7 @@ class UserDomainService(
         userService.findBy(
             id = Eq(1L),
             firstName = And(NotIn("hello", "bye"), NotEq("asb"), Like("b"), NotNull()),
+            lastName = Like("qwe")
         )
     }
 

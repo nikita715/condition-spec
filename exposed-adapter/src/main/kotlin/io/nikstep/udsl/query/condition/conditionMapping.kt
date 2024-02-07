@@ -15,20 +15,36 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.like
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.neq
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.notInList
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.notLike
+import org.jetbrains.exposed.sql.compoundAnd
+import org.jetbrains.exposed.sql.compoundOr
 
-//infix fun <T> Column<T>.eq(
-//    condition: BaseCondition<T>,
-//): Op<Boolean> =
-//    when (condition) {
-//        is InclusiveCondition -> this eq condition
-//        is ExclusiveCondition -> this eq condition
-//        is NullabilityCondition -> this eq condition
-//        is RangeCondition -> (this as Column<out Comparable<T>>) eqq condition
-//        is LikeCondition -> (this as Column<String>) eq condition
-//        is CompositeCondition -> this eq condition
-//    }
+infix fun <T : Comparable<T>> Column<T?>.eq(
+    condition: BaseCondition<T>?,
+): Op<Boolean>? =
+    when (condition) {
+        is InclusiveCondition -> (this as Column<T>) eq condition
+        is ExclusiveCondition -> (this as Column<T>) eq condition
+        is NullabilityCondition -> (this as Column<T>) eq condition
+        is RangeCondition -> (this as Column<T>) eq condition
+        is LikeCondition -> (this as Column<String>) eq condition
+        is CompositeCondition -> (this as Column<T>) eq condition
+        null -> null
+    }
 
-infix fun <T> Column<T>.eq(
+infix fun <T : Comparable<T>> Column<T>.eq(
+    condition: BaseCondition<T>?,
+): Op<Boolean>? =
+    when (condition) {
+        is InclusiveCondition -> this eq condition
+        is ExclusiveCondition -> this eq condition
+        is NullabilityCondition -> this eq condition
+        is RangeCondition -> this eq condition
+        is LikeCondition -> (this as Column<String>) eq condition
+        is CompositeCondition -> this eq condition
+        null -> null
+    }
+
+private infix fun <T : Comparable<T>> Column<T>.eq(
     condition: InclusiveCondition<T>,
 ): Op<Boolean> =
     when (condition) {
@@ -37,7 +53,7 @@ infix fun <T> Column<T>.eq(
         is Between -> this.between(condition.value1, condition.value2)
     }
 
-infix fun <T> Column<T>.eq(
+private infix fun <T : Comparable<T>> Column<T>.eq(
     condition: ExclusiveCondition<T>,
 ): Op<Boolean> =
     when (condition) {
@@ -45,7 +61,7 @@ infix fun <T> Column<T>.eq(
         is NotIn -> this notInList condition.values
     }
 
-infix fun <T> Column<T>.eq(
+private infix fun <T : Comparable<T>> Column<T>.eq(
     condition: NullabilityCondition<T>,
 ): Op<Boolean> =
     when (condition) {
@@ -53,7 +69,7 @@ infix fun <T> Column<T>.eq(
         is NotNull -> this.isNotNull()
     }
 
-infix fun <T : Comparable<T>> Column<T>.eq(
+private infix fun <T : Comparable<T>> Column<T>.eq(
     condition: RangeCondition<T>,
 ): Op<Boolean> =
     when (condition) {
@@ -63,7 +79,7 @@ infix fun <T : Comparable<T>> Column<T>.eq(
         is Less -> this less condition.value
     }
 
-infix fun Column<String>.eq(
+private infix fun Column<String>.eq(
     condition: LikeCondition,
 ): Op<Boolean> =
     when (condition) {
@@ -71,10 +87,10 @@ infix fun Column<String>.eq(
         is NotLike -> this notLike condition.value
     }
 
-//infix fun <T, C : BaseCondition<T>> Column<T>.eq(
-//    compositeCondition: CompositeCondition<T>,
-//): Op<Boolean> =
-//    when (compositeCondition) {
-//        is And -> compositeCondition.conditions.map { condition -> this eq condition }.compoundAnd()
-//        is Or -> compositeCondition.conditions.map { condition -> this eq condition }.compoundOr()
-//    }
+private infix fun <T : Comparable<T>, C : BaseCondition<T>> Column<T>.eq(
+    compositeCondition: CompositeCondition<T>,
+): Op<Boolean> =
+    when (compositeCondition) {
+        is And -> compositeCondition.conditions.mapNotNull { condition -> this eq condition }.compoundAnd()
+        is Or -> compositeCondition.conditions.mapNotNull { condition -> this eq condition }.compoundOr()
+    }
