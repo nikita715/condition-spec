@@ -8,8 +8,8 @@ class UserDomainService(
     private val userService: UserService,
 ) {
 
-    fun getUser() {
-        userService.findBy(
+    fun doSomeOperationWithUser() {
+        val user = userService.findOneBy(
             id = Eq(1L),
             firstName = NotIn("hello", "bye"),
             lastName = Like("qwe"),

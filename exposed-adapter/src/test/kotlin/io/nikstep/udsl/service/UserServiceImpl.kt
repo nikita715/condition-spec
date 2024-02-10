@@ -1,20 +1,22 @@
 package io.nikstep.udsl.service
 
+import io.nikstep.udsl.model.UserModel
 import io.nikstep.udsl.query.condition.Condition
 import io.nikstep.udsl.query.condition.SingleCondition
 import io.nikstep.udsl.query.condition.matches
+import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.compoundAnd
 import org.jetbrains.exposed.sql.select
 import java.time.LocalDateTime
 
 class UserServiceImpl : UserService {
 
-    override fun findBy(
+    override fun findOneBy(
         id: SingleCondition<Long>,
         createdAt: Condition<LocalDateTime>?,
         firstName: Condition<String>?,
         lastName: Condition<String>?
-    ) {
+    ): UserModel? =
         UserTable.select {
             listOfNotNull(
                 UserTable.id matches id,
@@ -22,7 +24,15 @@ class UserServiceImpl : UserService {
                 UserTable.firstName matches firstName,
                 UserTable.lastName matches lastName,
             ).compoundAnd()
-        }
-    }
+        }.limit(1).firstOrNull()?.toUserDomainModel()
+
+    private fun ResultRow.toUserDomainModel() =
+        UserModel(
+            id = get(UserTable.id),
+            firstName = get(UserTable.firstName),
+            lastName = get(UserTable.lastName),
+            birthDate = get(UserTable.birthDate),
+            createdAt = get(UserTable.createdAt),
+        )
 
 }
