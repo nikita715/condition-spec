@@ -15,6 +15,8 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.like
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.neq
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.notInList
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.notLike
+import org.jetbrains.exposed.sql.compoundAnd
+import org.jetbrains.exposed.sql.compoundOr
 
 infix fun <T : Comparable<T>> Column<T?>.matches(
     condition: Condition<T>?,
@@ -29,6 +31,7 @@ infix fun <T : Comparable<T>> Column<T>.matches(
         is NullabilityCondition -> this matches condition
         is RangeCondition -> this matches condition
         is LikeCondition -> (this as Column<String>) matches condition
+        is CompositeCondition -> this matches condition
         null -> null
     }
 
@@ -78,4 +81,12 @@ private infix fun Column<String>.matches(
         is Like -> this like "%${condition.value}%"
         is NotLike -> this notLike "%${condition.value}%"
         null -> null
+    }
+
+private infix fun <T : Comparable<T>> Column<T>.matches(
+    compositeCondition: CompositeCondition<T>,
+): Op<Boolean> =
+    when (compositeCondition) {
+        is And -> compositeCondition.conditions.mapNotNull { condition -> this matches condition }.compoundAnd()
+        is Or -> compositeCondition.conditions.mapNotNull { condition -> this matches condition }.compoundOr()
     }

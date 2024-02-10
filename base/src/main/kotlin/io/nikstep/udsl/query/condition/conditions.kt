@@ -6,6 +6,11 @@ package io.nikstep.udsl.query.condition
 sealed interface Condition<T : Comparable<T>>
 
 /*
+    Base condition interface
+ */
+sealed interface CompositeCondition<T : Comparable<T>> : Condition<T>
+
+/*
     Condition that includes specific instances
  */
 sealed interface InclusiveCondition<T : Comparable<T>> : Condition<T>
@@ -96,3 +101,15 @@ data class NotLike(
 class Null<T : Comparable<T>> : NullabilityCondition<T>
 
 class NotNull<T : Comparable<T>> : NullabilityCondition<T>
+
+data class And<T : Comparable<T>>(
+    val conditions: List<Condition<T>>,
+) : CompositeCondition<T> {
+    constructor(vararg conditions: Condition<T>) : this(conditions.toList())
+}
+
+data class Or<T : Comparable<T>>(
+    val conditions: List<Condition<T>>,
+) : CompositeCondition<T> {
+    constructor(vararg conditions: Condition<T>) : this(conditions.toList())
+}
