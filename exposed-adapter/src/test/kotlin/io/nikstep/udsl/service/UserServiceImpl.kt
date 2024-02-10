@@ -2,6 +2,7 @@ package io.nikstep.udsl.service
 
 import io.nikstep.udsl.model.UserModel
 import io.nikstep.udsl.query.condition.Condition
+import io.nikstep.udsl.query.condition.RangeCondition
 import io.nikstep.udsl.query.condition.SingleCondition
 import io.nikstep.udsl.query.condition.matches
 import org.jetbrains.exposed.sql.ResultRow
@@ -12,17 +13,17 @@ import java.time.LocalDateTime
 class UserServiceImpl : UserService {
 
     override fun findOneBy(
-        id: SingleCondition<Long>,
-        createdAt: Condition<LocalDateTime>?,
+        id: SingleCondition<Long>?,
         firstName: Condition<String>?,
-        lastName: Condition<String>?
+        lastName: Condition<String>?,
+        birthDate: RangeCondition<LocalDateTime>?,
     ): UserModel? =
         UserTable.select {
             listOfNotNull(
                 UserTable.id matches id,
-                UserTable.createdAt matches createdAt,
                 UserTable.firstName matches firstName,
                 UserTable.lastName matches lastName,
+                UserTable.birthDate matches birthDate,
             ).compoundAnd()
         }.limit(1).firstOrNull()?.toUserDomainModel()
 

@@ -1,8 +1,9 @@
 package io.nikstep.udsl.service
 
-import io.nikstep.udsl.query.condition.Eq
+import io.nikstep.udsl.query.condition.LessEq
 import io.nikstep.udsl.query.condition.Like
 import io.nikstep.udsl.query.condition.NotIn
+import java.time.LocalDateTime
 
 class UserDomainService(
     private val userService: UserService,
@@ -10,9 +11,9 @@ class UserDomainService(
 
     fun doSomeOperationWithUser() {
         val user = userService.findOneBy(
-            id = Eq(1L),
-            firstName = NotIn("hello", "bye"),
-            lastName = Like("qwe"),
+            firstName = NotIn("Bob", "Bill"),
+            lastName = Like("son"),
+            birthDate = LessEq(LocalDateTime.now().minusYears(20)),
         )
     }
 
