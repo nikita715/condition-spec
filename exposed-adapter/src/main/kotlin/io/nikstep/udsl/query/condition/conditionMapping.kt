@@ -83,7 +83,7 @@ private infix fun Column<String>.matches(
     condition: LikeCondition?,
 ): Op<Boolean>? =
     when (condition) {
-        is Like -> this like condition.value
-        is NotLike -> this notLike condition.value
+        is Like -> this like "%${condition.value}%"
+        is NotLike -> this notLike "%${condition.value}%"
         null -> null
     }
