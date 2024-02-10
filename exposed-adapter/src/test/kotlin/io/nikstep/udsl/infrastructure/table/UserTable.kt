@@ -1,4 +1,4 @@
-package io.nikstep.udsl.service
+package io.nikstep.udsl.infrastructure.table
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.datetime

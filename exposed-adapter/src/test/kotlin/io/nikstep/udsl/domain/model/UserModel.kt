@@ -1,4 +1,4 @@
-package io.nikstep.udsl.model
+package io.nikstep.udsl.domain.model
 
 import java.time.LocalDateTime
 

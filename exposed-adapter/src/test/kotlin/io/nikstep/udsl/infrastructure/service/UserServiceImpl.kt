@@ -1,6 +1,8 @@
-package io.nikstep.udsl.service
+package io.nikstep.udsl.infrastructure.service
 
-import io.nikstep.udsl.model.UserModel
+import io.nikstep.udsl.domain.model.UserModel
+import io.nikstep.udsl.domain.service.UserService
+import io.nikstep.udsl.infrastructure.table.UserTable
 import io.nikstep.udsl.query.condition.Condition
 import io.nikstep.udsl.query.condition.RangeCondition
 import io.nikstep.udsl.query.condition.SingleCondition
