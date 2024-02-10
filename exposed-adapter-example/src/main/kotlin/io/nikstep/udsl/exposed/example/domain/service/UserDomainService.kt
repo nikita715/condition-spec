@@ -1,6 +1,6 @@
-package io.nikstep.udsl.domain.service
+package io.nikstep.udsl.exposed.example.domain.service
 
-import io.nikstep.udsl.domain.model.UserModel
+import io.nikstep.udsl.exposed.example.domain.model.UserModel
 import io.nikstep.udsl.query.condition.Condition
 import io.nikstep.udsl.query.condition.RangeCondition
 import io.nikstep.udsl.query.condition.SingleCondition

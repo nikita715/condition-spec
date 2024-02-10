@@ -1,12 +1,12 @@
-package io.nikstep.udsl.infrastructure.service
+package io.nikstep.udsl.exposed.example.infrastructure.service
 
-import io.nikstep.udsl.domain.model.UserModel
-import io.nikstep.udsl.domain.service.UserDomainService
-import io.nikstep.udsl.infrastructure.table.UserTable
+import io.nikstep.udsl.exposed.example.domain.model.UserModel
+import io.nikstep.udsl.exposed.example.domain.service.UserDomainService
+import io.nikstep.udsl.exposed.example.infrastructure.table.UserTable
+import io.nikstep.udsl.exposed.matches
 import io.nikstep.udsl.query.condition.Condition
 import io.nikstep.udsl.query.condition.RangeCondition
 import io.nikstep.udsl.query.condition.SingleCondition
-import io.nikstep.udsl.query.condition.matches
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.compoundAnd
 import org.jetbrains.exposed.sql.select

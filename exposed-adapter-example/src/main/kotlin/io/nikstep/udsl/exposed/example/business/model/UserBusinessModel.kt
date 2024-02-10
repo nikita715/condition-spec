@@ -1,11 +1,10 @@
-package io.nikstep.udsl.domain.model
+package io.nikstep.udsl.exposed.example.business.model
 
 import java.time.LocalDateTime
 
-data class UserModel(
+data class UserBusinessModel(
     val id: Long,
     val firstName: String?,
     val lastName: String,
     val birthDate: LocalDateTime?,
-    val createdAt: LocalDateTime,
 )

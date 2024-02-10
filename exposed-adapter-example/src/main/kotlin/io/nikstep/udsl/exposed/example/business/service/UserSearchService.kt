@@ -1,9 +1,9 @@
-package io.nikstep.udsl.business.service
+package io.nikstep.udsl.exposed.example.business.service
 
-import io.nikstep.udsl.business.dto.UserSearchRequest
-import io.nikstep.udsl.business.model.UserBusinessModel
-import io.nikstep.udsl.domain.model.UserModel
-import io.nikstep.udsl.domain.service.UserDomainService
+import io.nikstep.udsl.exposed.example.business.dto.UserSearchRequest
+import io.nikstep.udsl.exposed.example.business.model.UserBusinessModel
+import io.nikstep.udsl.exposed.example.domain.model.UserModel
+import io.nikstep.udsl.exposed.example.domain.service.UserDomainService
 import io.nikstep.udsl.query.condition.LessEq
 import io.nikstep.udsl.query.condition.Like
 import io.nikstep.udsl.query.condition.NotIn
