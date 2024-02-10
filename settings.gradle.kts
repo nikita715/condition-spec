@@ -13,3 +13,4 @@ plugins {
 
 include("base")
 include("exposed-adapter")
+include("exposed-adapter-example")
