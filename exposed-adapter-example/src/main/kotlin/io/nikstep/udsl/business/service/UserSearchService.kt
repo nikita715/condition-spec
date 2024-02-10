@@ -3,21 +3,21 @@ package io.nikstep.udsl.business.service
 import io.nikstep.udsl.business.dto.UserSearchRequest
 import io.nikstep.udsl.business.model.UserBusinessModel
 import io.nikstep.udsl.domain.model.UserModel
-import io.nikstep.udsl.domain.service.UserService
+import io.nikstep.udsl.domain.service.UserDomainService
 import io.nikstep.udsl.query.condition.LessEq
 import io.nikstep.udsl.query.condition.Like
 import io.nikstep.udsl.query.condition.NotIn
 import io.nikstep.udsl.query.condition.and
 import java.time.LocalDateTime
 
-class UserDomainService(
-    private val userService: UserService,
+class UserSearchService(
+    private val userDomainService: UserDomainService,
 ) {
 
     fun findFirstUserByParameters(
         request: UserSearchRequest,
     ): UserBusinessModel {
-        val userModel = userService.findOneBy(
+        val userModel = userDomainService.findOneBy(
             firstName = NotIn(request.firstNameNot1, request.firstNameNot2) and Like(request.firstNameLike),
             lastName = Like(request.lastNameLike),
             birthDate = LessEq(LocalDateTime.now().minusYears(request.minimumAge)),

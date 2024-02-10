@@ -1,7 +1,7 @@
 package io.nikstep.udsl.infrastructure.service
 
 import io.nikstep.udsl.domain.model.UserModel
-import io.nikstep.udsl.domain.service.UserService
+import io.nikstep.udsl.domain.service.UserDomainService
 import io.nikstep.udsl.infrastructure.table.UserTable
 import io.nikstep.udsl.query.condition.Condition
 import io.nikstep.udsl.query.condition.RangeCondition
@@ -12,7 +12,7 @@ import org.jetbrains.exposed.sql.compoundAnd
 import org.jetbrains.exposed.sql.select
 import java.time.LocalDateTime
 
-class UserServiceImpl : UserService {
+class UserDomainServiceImpl : UserDomainService {
 
     override fun findOneBy(
         id: SingleCondition<Long>?,

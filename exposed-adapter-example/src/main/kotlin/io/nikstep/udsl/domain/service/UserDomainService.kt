@@ -6,7 +6,7 @@ import io.nikstep.udsl.query.condition.RangeCondition
 import io.nikstep.udsl.query.condition.SingleCondition
 import java.time.LocalDateTime
 
-interface UserService {
+interface UserDomainService {
 
     fun findOneBy(
         id: SingleCondition<Long>? = null,
