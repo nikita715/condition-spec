@@ -18,15 +18,7 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.notLike
 
 infix fun <T : Comparable<T>> Column<T?>.matches(
     condition: Condition<T>?,
-): Op<Boolean>? =
-    when (condition) {
-        is InclusiveCondition -> (this as Column<T>) matches condition
-        is ExclusiveCondition -> (this as Column<T>) matches condition
-        is NullabilityCondition -> (this as Column<T>) matches condition
-        is RangeCondition -> (this as Column<T>) matches condition
-        is LikeCondition -> (this as Column<String>) matches condition
-        null -> null
-    }
+): Op<Boolean>? = (this as Column<T>) matches condition
 
 infix fun <T : Comparable<T>> Column<T>.matches(
     condition: Condition<T>?,
