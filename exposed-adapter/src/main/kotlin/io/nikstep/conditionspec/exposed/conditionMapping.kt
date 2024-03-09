@@ -40,10 +40,12 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.notLike
 import org.jetbrains.exposed.sql.compoundAnd
 import org.jetbrains.exposed.sql.compoundOr
 
+@JvmName("nullableMatches")
 infix fun <T : Comparable<T>> Column<T?>.matches(
     condition: Condition<T>?,
 ): Op<Boolean>? = (this as Column<T>) matches condition
 
+@JvmName("matches")
 infix fun <T : Comparable<T>> Column<T>.matches(
     condition: Condition<T>?,
 ): Op<Boolean>? =
