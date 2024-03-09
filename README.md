@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/nikita715/condition-spec.svg)](https://jitpack.io/#nikita715/condition-spec)
+
 # condition-spec
 Collection of value objects that can be used for search in abstract data source
 
