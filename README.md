@@ -52,12 +52,18 @@ dependencies {
 Code example
 
 ```
-UserTable.select {
-    listOfNotNull(
-        UserTable.id matches id,
-        UserTable.firstName matches firstName,
-        UserTable.lastName matches lastName,
-        UserTable.birthDate matches birthDate,
-    ).compoundAnd()
-}
+override fun findOneBy(
+    id: SingleCondition<Long>?,
+    firstName: Condition<String>?,
+    lastName: Condition<String>?,
+    birthDate: RangeCondition<LocalDateTime>?,
+): UserModel? =
+    UserTable.select {
+        listOfNotNull(
+            UserTable.id matches id,
+            UserTable.firstName matches firstName,
+            UserTable.lastName matches lastName,
+            UserTable.birthDate matches birthDate,
+        ).compoundAnd()
+    }.limit(1).firstOrNull()?.toUserDomainModel()
 ```
