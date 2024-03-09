@@ -1,7 +1,5 @@
 plugins {
     kotlin("jvm") version "1.9.0"
-    `java-library`
-    `maven-publish`
 }
 
 allprojects {
@@ -13,9 +11,8 @@ allprojects {
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "maven-publish")
 
-    group = "io.nikstep"
+    group = "io.nikstep.condition-spec"
     version = "1.0-SNAPSHOT"
 
     dependencies {
@@ -31,16 +28,5 @@ subprojects {
 
     kotlin {
         jvmToolchain(8)
-    }
-
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                groupId = group.toString()
-                artifactId = rootProject.name
-                version = version
-                from(components["java"])
-            }
-        }
     }
 }
