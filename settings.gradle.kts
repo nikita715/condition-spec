@@ -1,4 +1,4 @@
-rootProject.name = "udsl"
+rootProject.name = "condition-spec"
 
 pluginManagement {
     repositories {

@@ -5,6 +5,7 @@ plugins {
 allprojects {
     repositories {
         mavenCentral()
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
@@ -15,6 +16,9 @@ subprojects {
     version = "1.0-SNAPSHOT"
 
     dependencies {
+        // Jitpack
+        implementation("com.github.jitpack:gradle-simple:2.0")
+
         testImplementation(kotlin("test"))
     }
 
