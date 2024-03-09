@@ -4,7 +4,6 @@ Collection of value objects that can be used for search in abstract data source
 
 ### Usage
 
-Gradle
 
 ```
 dependencies {
