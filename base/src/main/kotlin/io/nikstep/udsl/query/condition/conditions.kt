@@ -47,39 +47,47 @@ sealed interface RangeCondition<T : Comparable<T>> : Condition<T> {
  */
 sealed interface NullabilityCondition<T : Comparable<T>> : Condition<T>
 
-data class Eq<T : Comparable<T>>(
+@JvmInline
+value class Eq<T : Comparable<T>>(
     val value: T,
 ) : SingleCondition<T>
 
-data class NotEq<T : Comparable<T>>(
+@JvmInline
+value class NotEq<T : Comparable<T>>(
     val value: T,
 ) : ExclusiveCondition<T>
 
-data class In<T : Comparable<T>>(
+@JvmInline
+value class In<T : Comparable<T>>(
     val values: List<T>,
 ) : MultiCondition<T> {
     constructor(vararg values: T) : this(values = values.toList())
 }
 
-data class NotIn<T : Comparable<T>>(
+@JvmInline
+value class NotIn<T : Comparable<T>>(
     val values: List<T>,
 ) : ExclusiveCondition<T> {
     constructor(vararg values: T) : this(values = values.toList())
 }
 
-data class GreaterEq<T : Comparable<T>>(
+@JvmInline
+value class GreaterEq<T : Comparable<T>>(
     override val value: T,
 ) : RangeCondition<T>
 
-data class Greater<T : Comparable<T>>(
+@JvmInline
+value class Greater<T : Comparable<T>>(
     override val value: T,
 ) : RangeCondition<T>
 
-data class LessEq<T : Comparable<T>>(
+@JvmInline
+value class LessEq<T : Comparable<T>>(
     override val value: T,
 ) : RangeCondition<T>
 
-data class Less<T : Comparable<T>>(
+@JvmInline
+value class Less<T : Comparable<T>>(
     override val value: T,
 ) : RangeCondition<T>
 
@@ -90,11 +98,13 @@ data class Between<T : Comparable<T>>(
     constructor(vararg values: T) : this(values[0], values[1])
 }
 
-data class Like(
+@JvmInline
+value class Like(
     val value: String,
 ) : LikeCondition
 
-data class NotLike(
+@JvmInline
+value class NotLike(
     val value: String,
 ) : LikeCondition
 
@@ -102,13 +112,15 @@ class Null<T : Comparable<T>> : NullabilityCondition<T>
 
 class NotNull<T : Comparable<T>> : NullabilityCondition<T>
 
-data class And<T : Comparable<T>>(
+@JvmInline
+value class And<T : Comparable<T>>(
     val conditions: List<Condition<T>>,
 ) : CompositeCondition<T> {
     constructor(vararg conditions: Condition<T>) : this(conditions.toList())
 }
 
-data class Or<T : Comparable<T>>(
+@JvmInline
+value class Or<T : Comparable<T>>(
     val conditions: List<Condition<T>>,
 ) : CompositeCondition<T> {
     constructor(vararg conditions: Condition<T>) : this(conditions.toList())
