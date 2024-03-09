@@ -13,7 +13,7 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
     group = "io.nikstep.condition-spec"
-    version = "1.0-SNAPSHOT"
+    version = "1.0.5"
 
     dependencies {
         // Jitpack
