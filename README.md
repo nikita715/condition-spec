@@ -1,7 +1,8 @@
 [![](https://jitpack.io/v/nikita715/condition-spec.svg)](https://jitpack.io/#nikita715/condition-spec)
+[![pages-build-deployment](https://github.com/nikita715/condition-spec/actions/workflows/pages/pages-build-deployment/badge.svg?branch=master)](https://github.com/nikita715/condition-spec/actions/workflows/pages/pages-build-deployment)
 
 # condition-spec
-Collection of value objects that can be used for search in abstract data source
+Collection of value classes that can be used for search in abstract data source. See the list of classes in [Dokka](https://nikita715.github.io/condition-spec)
 
 
 ### Usage
@@ -52,18 +53,22 @@ dependencies {
 Code example
 
 ```
-override fun findOneBy(
-    id: SingleCondition<Long>?,
-    firstName: Condition<String>?,
-    lastName: Condition<String>?,
-    birthDate: RangeCondition<LocalDateTime>?,
-): UserModel? =
-    UserTable.select {
-        listOfNotNull(
-            UserTable.id matches id,
-            UserTable.firstName matches firstName,
-            UserTable.lastName matches lastName,
-            UserTable.birthDate matches birthDate,
-        ).compoundAnd()
-    }.limit(1).firstOrNull()?.toUserDomainModel()
+class UserServiceImpl: UserService {
+    override fun findOneBy(
+        id: SingleCondition<Long>?,
+        firstName: Condition<String>?,
+        lastName: Condition<String>?,
+        birthDate: RangeCondition<LocalDateTime>?,
+    ): UserModel? =
+        UserTable.select {
+            listOfNotNull(
+                UserTable.id matches id,
+                UserTable.firstName matches firstName,
+                UserTable.lastName matches lastName,
+                UserTable.birthDate matches birthDate,
+            ).compoundAnd()
+        }.limit(1).firstOrNull()?.toUserDomainModel()
+
+    ...
+}
 ```
