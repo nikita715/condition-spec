@@ -67,7 +67,7 @@ class UserServiceImpl: UserService {
                 UserTable.lastName matches lastName,
                 UserTable.birthDate matches birthDate,
             ).compoundAnd()
-        }.limit(1).firstOrNull()?.toUserDomainModel()
+        }.limit(1).firstOrNull()?.toUserModel()
 
     ...
 }
