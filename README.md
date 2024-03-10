@@ -39,7 +39,7 @@ userService.findOneBy(
 
 ## Exposed adapter
 
-Adapter that translates condition-spec conditions to exposed search conditions
+Adapter that translates condition-spec conditions to [Exposed](https://github.com/JetBrains/Exposed) search conditions
 
 ### Usage
 
