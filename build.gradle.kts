@@ -33,3 +33,7 @@ subprojects {
         jvmToolchain(8)
     }
 }
+
+tasks.dokkaHtmlMultiModule {
+    outputDirectory = layout.projectDirectory.dir("docs")
+}

@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:base
+io.nikstep.conditionspec.condition
+module:exposed-adapter
+io.nikstep.conditionspec.exposed
