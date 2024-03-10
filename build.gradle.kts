@@ -1,5 +1,8 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     kotlin("jvm") version "1.9.0"
+    id("org.jetbrains.dokka") version "1.9.20"
 }
 
 allprojects {
@@ -29,4 +32,8 @@ subprojects {
     kotlin {
         jvmToolchain(8)
     }
+}
+
+tasks.dokkaHtmlMultiModule {
+    outputDirectory = layout.projectDirectory.dir("dokka")
 }

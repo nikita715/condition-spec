@@ -152,7 +152,7 @@ class Null<T : Comparable<T>> : NullabilityCondition<T>
 class NotNull<T : Comparable<T>> : NullabilityCondition<T>
 
 /**
- * Condition that includes instances that match one of nested conditions
+ * Condition that includes instances with a parameter matching one of nested conditions
  */
 @JvmInline
 value class And<T : Comparable<T>>(
@@ -162,7 +162,7 @@ value class And<T : Comparable<T>>(
 }
 
 /**
- * Condition that includes instances that match all of nested conditions
+ * Condition that includes instances with a parameter matching all of nested conditions
  */
 @JvmInline
 value class Or<T : Comparable<T>>(

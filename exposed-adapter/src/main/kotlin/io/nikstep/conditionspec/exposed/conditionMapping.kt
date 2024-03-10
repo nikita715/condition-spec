@@ -40,11 +40,17 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.notLike
 import org.jetbrains.exposed.sql.compoundAnd
 import org.jetbrains.exposed.sql.compoundOr
 
+/**
+ * Apply the corresponding Exposed where clause for a nullable column
+ */
 @JvmName("nullableMatches")
 infix fun <T : Comparable<T>> Column<T?>.matches(
     condition: Condition<T>?,
 ): Op<Boolean>? = (this as Column<T>) matches condition
 
+/**
+ * Apply the corresponding Exposed where clause for a non-nullable column
+ */
 @JvmName("matches")
 infix fun <T : Comparable<T>> Column<T>.matches(
     condition: Condition<T>?,

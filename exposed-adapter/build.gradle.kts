@@ -1,5 +1,8 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     `maven-publish`
+    id("org.jetbrains.dokka")
 }
 
 dependencies {
