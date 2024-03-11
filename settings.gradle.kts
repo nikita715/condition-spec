@@ -14,4 +14,5 @@ plugins {
 include("base")
 include("exposed-adapter")
 include("criteria-api-adapter")
+include("jooq-adapter")
 include("exposed-adapter-example")
