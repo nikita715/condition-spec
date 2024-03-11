@@ -9,7 +9,10 @@ dependencies {
     implementation(project(":base"))
 
     // Hibernate
-    implementation("org.hibernate.orm:hibernate-core:6.4.2.Final")
+    implementation("org.hibernate.orm:hibernate-core:6.4.4.Final")
+
+    // Tests
+    testImplementation("com.h2database:h2:2.2.222")
 }
 
 publishing {
