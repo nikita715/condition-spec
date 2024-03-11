@@ -13,4 +13,5 @@ plugins {
 
 include("base")
 include("exposed-adapter")
+include("criteria-api-adapter")
 include("exposed-adapter-example")
